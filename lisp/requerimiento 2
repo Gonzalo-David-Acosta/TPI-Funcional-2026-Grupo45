@@ -1,0 +1,19 @@
+;; ========================================================
+;; FUNCIÓN: timer
+;; NATURALEZA: Pura
+;; ESTRATEGIA: Función Predicado
+;; IMPACTO: No destructiva
+;; ========================================================
+
+(defun timer (timestamp)
+  (let ((instante (mod timestamp (+ 90 6 120))))
+
+    (cond
+      ((< instante 90)
+       'en-rojo)
+
+      ((< instante (+ 90 6))
+       'en-amarillo)
+
+      (t
+       'en-verde))))
