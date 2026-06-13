@@ -1,3 +1,49 @@
+
+;; ========================================================
+;; FUNCIÓN: transicion
+;; NATURALEZA: Pura
+;; ESTRATEGIA: Función condicional
+;; IMPACTO: No destructiva
+;; ========================================================
+
+(defun transicion (color-actual cambiar-a)
+
+  (cond
+    ((and (eq color-actual 'en-rojo)
+          (eq cambiar-a 'amarillo))
+     (list color-actual "cambiar-a-amarillo"))
+
+    ((and (eq color-actual 'en-amarillo)
+          (eq cambiar-a 'verde))
+     (list color-actual "cambiar-a-verde"))
+
+    ((and (eq color-actual 'en-verde)
+          (eq cambiar-a 'rojo))
+     (list color-actual "cambiar-a-rojo"))
+
+    (t
+     (list color-actual 'accion-por-defecto))))
+;; ========================================================
+;; FUNCIÓN: timer
+;; NATURALEZA: Pura
+;; ESTRATEGIA: Función condicional
+;; IMPACTO: No destructiva
+;; ========================================================
+
+(defun timer (timestamp)
+  (let ((instante (mod timestamp (+ 90 6 120))))
+
+    (cond
+      ((< instante 90)
+       'en-rojo)
+
+      ((< instante (+ 90 6))
+       'en-amarillo)
+
+      (t
+       'en-verde))))
+
+
 ;; ========================================================
 ;; FUNCIÓN: informe
 ;; NATURALEZA: Impura (Función de logging que escribe en pantalla)
