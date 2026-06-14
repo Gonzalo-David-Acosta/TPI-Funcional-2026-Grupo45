@@ -80,3 +80,17 @@
 		(t "Ciclo optimo")
 	)
 )
+
+
+;; ========================================================
+;; FUNCIÓN: ciclos-por-tiempo
+;; NATURALEZA: Pura
+;; ESTRATEGIA: recursiva simple
+;; IMPACTO: No destructiva
+;; ========================================================
+(defun ciclos-por-tiempo (minutos)
+
+    (if (and (numberp minutos) (> (* minutos 60) 306))
+	(+ 1 (ciclos-por-tiempo(/ (- (* minutos 60) 306) 60)))
+	     0))
+  	
