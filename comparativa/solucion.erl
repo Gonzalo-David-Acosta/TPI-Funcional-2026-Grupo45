@@ -25,8 +25,32 @@ transicion('intermitente-amarillo')->
 transicion(_) ->
     ['estado-invalido'].
 
-% Función puente para que Sublime muestre el resultado directo
+
 start()->
     ColorActual = 'en-amarillo',
     [Resultado] = transicion(ColorActual),
     io:format("~p~n", [Resultado]).    
+
+
+-module(timee).
+-export([time/0, obtener_color/1]).
+%Se calcula el segundo exacto.
+time() ->
+    TiempoActual = os:system_time(seconds),
+    CicloTotal = 225, %% 90+3+120+3+6+3 = 225
+    A = TiempoActual rem CicloTotal,
+    obtener_color(A).
+
+% Se verifica el color actual del semaforo.
+obtener_color(A) when A < 90 -> 
+    'en-rojo';
+obtener_color(A) when A < 93 ->
+    'intermitente-rojo';
+obtener_color(A) when A < 213 -> 
+    'en-verde';
+obtener_color(A) when A < 216 -> 
+    'intermitente-verde';
+obtener_color(A) when A < 222 -> 
+    'en-amarillo';
+obtener_color(A) when A < 226 -> 
+    'intermitente-amarillo'.
