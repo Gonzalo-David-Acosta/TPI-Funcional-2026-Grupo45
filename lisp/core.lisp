@@ -51,12 +51,22 @@
 
 ;; ========================================================
 ;; FUNCIÓN: informe
-;; NATURALEZA: Impura (Función de logging que escribe en pantalla)
+;; NATURALEZA: Impura (Escribe en pantalla y en un archivo de texto externo)
 ;; ESTRATEGIA: Secuencial (Operaciones de salida)
-;; IMPACTO: No destructiva
+;; IMPACTO: Destructiva (Modifica el sistema de archivos)
+;; EXTENSIÓN 2: Implementa la persistencia de datos en disco.
 ;; ========================================================
 (defun informe (datos)
-	(format t "Tiempo ~A: la luz ha cambiado de ~A a ~A ~%" (first datos) (second datos) (third datos))
+    (with-open-file (stream "informe-ejecucion-semaforo.txt" 
+    :direction :output 
+    :if-exists :append 
+    :if-does-not-exist :create
+    )
+
+    (format stream "Informe de Ejecución del Sistema Semafórico~%")
+    (format stream "=========================================~%")
+    (format stream "Tiempo ~A: la luz ha cambiado de ~A a ~A ~%" (first datos) (second datos) (third datos))
+    (format stream "~% --- Fin del Informe ---~%"))
 )
 
 ;; ========================================================
