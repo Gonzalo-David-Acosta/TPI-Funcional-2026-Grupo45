@@ -27,6 +27,7 @@
             (list color-actual "cambiar-a-rojo"))
     (t
      (list color-actual 'accion-por-defecto))))
+
 ;; ========================================================
 ;; FUNCIÓN: timer
 ;; NATURALEZA: Pura
@@ -48,7 +49,6 @@
       (t
        'intermitente-amarillo))))
 
-
 ;; ========================================================
 ;; FUNCIÓN: informe
 ;; NATURALEZA: Impura (Función de logging que escribe en pantalla)
@@ -64,10 +64,11 @@
 ;; NATURALEZA: Pura
 ;; ESTRATEGIA: Condicional
 ;; IMPACTO: No destructiva
+;; EXTENSIÓN 1: Suma 9 segundos por las 3 intermitencias de seguridad
 ;; ========================================================
 (defun duracion-ciclo (ciclo)
 	(and (consp ciclo) (numberp (first ciclo)) (numberp (second ciclo)) (numberp (third ciclo))
-		(+ (first ciclo) (second ciclo) (third ciclo))
+		(+ (first ciclo) (second ciclo) (third ciclo) 9)
 	)
 )
 
@@ -85,7 +86,6 @@
 		(t "Ciclo optimo")
 	)
 )
-
 
 ;; ========================================================
 ;; FUNCIÓN: ciclos-por-tiempo
@@ -113,6 +113,7 @@
         'verde (float (/ (* (contador-verde hora) 100) hora))
     )
 )
+
 (defun contador-rojo (hora)
     (cond
         ((<= hora 0) 0)
@@ -139,5 +140,3 @@
         ((> hora 0) (+ 123 (contador-verde (- hora 225))))
     )
 )
-
-  	
