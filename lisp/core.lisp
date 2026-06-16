@@ -104,4 +104,4 @@
 (defun ciclos-por-tiempo (minutos)
   (cond 
     ((not (numberp minutos)) 0)
-    (t (calcular-ciclos-recursivo (* minutos 60) 0))))
+    (t (calcular-ciclos (* minutos 60) 0))))
