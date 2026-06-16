@@ -10,17 +10,21 @@
 
   (cond
     ((and (eq color-actual 'en-rojo)
+          (eq cambiar-a 'intermitente-rojo))
+     (list color-actual "cambiar-a-intermitente-rojo"))
+    ((and (eq color-actual 'intermitente-rojo)
           (eq cambiar-a 'amarillo))
-     (list color-actual "cambiar-a-amarillo"))
+    (list color-actual "cambiar-a-amarillo"))
 
-    ((and (eq color-actual 'en-amarillo)
-          (eq cambiar-a 'verde))
-     (list color-actual "cambiar-a-verde"))
+    ((and (eq color-actual 'en-amarillo) (eq cambia-a 'intermitente-amarillo));;amarillo llega a intermitencia.
+            (list color-actual "cambiar-a-intermitente-amarillo"))
+        ((and (eq color-actual 'intermitente-amarillo) (eq cambia-a 'verde))   ;;amarillo llega a verde.
+            (list color-actual "cambiar-a-verde"))
 
-    ((and (eq color-actual 'en-verde)
-          (eq cambiar-a 'rojo))
-     (list color-actual "cambiar-a-rojo"))
-
+        ((and (eq color-actual 'en-verde) (eq cambia-a 'intermitente-verde))   ;;verde llega a intermitencia.
+            (list color-actual "cambiar-a-intermitente-verde"))
+        ((and (eq color-actual 'intermitente-verde) (eq cambia-a 'rojo))   ;;verde llega a rojo.
+            (list color-actual "cambiar-a-rojo"))
     (t
      (list color-actual 'accion-por-defecto))))
 ;; ========================================================
@@ -31,17 +35,18 @@
 ;; ========================================================
 
 (defun timer (timestamp)
-  (let ((instante (mod timestamp (+ 90 6 120))))
+  (let ((instante (mod timestamp (+ 90 3 120 3 6))))
 
     (cond
       ((< instante 90)
        'en-rojo)
-
-      ((< instante (+ 90 6))
-       'en-amarillo)
-
+      ((< instante 93) 'intermitente-rojo)
+      ((< instante 213)
+       'en-verde)
+      ((< instante 216) 'intermitente-verde)
+      ((< instante 222) 'en-amarillo)
       (t
-       'en-verde))))
+       'intermitente-amarillo))))
 
 
 ;; ========================================================
