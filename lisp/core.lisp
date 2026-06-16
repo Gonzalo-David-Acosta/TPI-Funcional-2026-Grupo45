@@ -16,14 +16,14 @@
           (eq cambiar-a 'amarillo))
     (list color-actual "cambiar-a-amarillo"))
 
-    ((and (eq color-actual 'en-amarillo) (eq cambia-a 'intermitente-amarillo));;amarillo llega a intermitencia.
+    ((and (eq color-actual 'en-amarillo) (eq cambiar-a 'intermitente-amarillo));;amarillo llega a intermitencia.
             (list color-actual "cambiar-a-intermitente-amarillo"))
-        ((and (eq color-actual 'intermitente-amarillo) (eq cambia-a 'verde))   ;;amarillo llega a verde.
+        ((and (eq color-actual 'intermitente-amarillo) (eq cambiar-a 'verde))   ;;amarillo llega a verde.
             (list color-actual "cambiar-a-verde"))
 
-        ((and (eq color-actual 'en-verde) (eq cambia-a 'intermitente-verde))   ;;verde llega a intermitencia.
+        ((and (eq color-actual 'en-verde) (eq cambiar-a 'intermitente-verde))   ;;verde llega a intermitencia.
             (list color-actual "cambiar-a-intermitente-verde"))
-        ((and (eq color-actual 'intermitente-verde) (eq cambia-a 'rojo))   ;;verde llega a rojo.
+        ((and (eq color-actual 'intermitente-verde) (eq cambiar-a 'rojo))   ;;verde llega a rojo.
             (list color-actual "cambiar-a-rojo"))
     (t
      (list color-actual 'accion-por-defecto))))
