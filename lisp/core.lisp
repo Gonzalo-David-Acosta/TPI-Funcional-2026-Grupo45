@@ -98,7 +98,7 @@
 ;; FUNCIÓN: porcentaje
 ;; NATURALEZA: Pura (Mantiene los mismos parametros)
 ;; ESTRATEGIA: Orden Superior (Trabaja en conjunto con otras funciones)
-;; IMPACTO: Destructiva (no altera la informacion original)
+;; IMPACTO:No Destructiva (no altera la informacion original)
 ;; ========================================================
 
 (defun porcentaje (hora)
