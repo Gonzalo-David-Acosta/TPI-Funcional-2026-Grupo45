@@ -49,15 +49,20 @@
       (t
        'intermitente-amarillo))))
 
-;; ========================================================
 ;; FUNCIÓN: informe
-;; NATURALEZA: Impura (Función de logging que escribe en pantalla)
-;; ESTRATEGIA: Secuencial (Operaciones de salida)
-;; IMPACTO: No destructiva
+;; NATURALEZA: Impura (Escribe en un archivo de texto externo)
+;; ESTRATEGIA: Secuencial (Uso de macro with-open-file)
+;; IMPACTO: Destructiva (Modifica el sistema de archivos)
+;; EXTENSIÓN 2: Implementa la persistencia de datos en disco.
 ;; ========================================================
 (defun informe (datos)
-	(format t "Tiempo ~A: la luz ha cambiado de ~A a ~A ~%" (first datos) (second datos) (third datos))
-)
+  (with-open-file (stream "informe-ejecucion-semaforo.txt" 
+  :direction :output :if-exists :append :if-does-not-exist :create)
+    (format stream "Informe de Ejecución del Sistema Semafórico~%")
+    (format stream "=========================================~%")
+    (format stream "Tiempo ~A: la luz ha cambiado de ~A a ~A ~%" 
+    (first datos) (second datos) (third datos))
+    (format stream "% --- Fin del Informe ---%")))
 
 ;; ========================================================
 ;; FUNCIÓN: duracion-ciclo
@@ -66,9 +71,9 @@
 ;; IMPACTO: No destructiva
 ;; ========================================================
 (defun duracion-ciclo (ciclo)
-	(and (consp ciclo) (numberp (first ciclo)) (numberp (second ciclo)) (numberp (third ciclo))
-		(+ (first ciclo) (second ciclo) (third ciclo))
-	)
+  (and (consp ciclo) (numberp (first ciclo)) (numberp (second ciclo)) (numberp (third ciclo))
+    (+ (first ciclo) (second ciclo) (third ciclo) 9)
+  )
 )
 
 ;; ========================================================
