@@ -108,8 +108,8 @@
 
 ;; ========================================================
 ;; FUNCIÓN: porcentaje
-;; NATURALEZA: Pura (Mantiene los mismos parametros)
-;; ESTRATEGIA: Orden Superior (Depende de funciones auxiliares)
+;; NATURALEZA: Pura
+;; ESTRATEGIA: Orden Superior (depende de funciones auxiliares)
 ;; IMPACTO: No destructiva
 ;; ========================================================
 
@@ -122,41 +122,41 @@
 )
 
 ;; ========================================================
-;; CONTADOR ROJO (incluye intermitencia de 3 segundos)
+;; CONTADOR ROJO (incluye intermitente 3s)
 ;; ========================================================
 
 (defun contador-rojo (hora)
     (cond
         ((<= hora 0) 0)
-        ((< hora 90) hora)              ;; rojo normal
-        ((< hora 225) 90)               ;; rojo completo del ciclo
+        ((< hora 90) hora)          ;; rojo normal
+        ((< hora 225) 90)           ;; ciclo completo rojo
         (t (+ 90 (contador-rojo (- hora 225))))
     )
 )
 
 ;; ========================================================
-;; CONTADOR VERDE (incluye intermitencia de 3 segundos)
+;; CONTADOR VERDE (incluye intermitente 3s)
 ;; ========================================================
 
 (defun contador-verde (hora)
     (cond
         ((<= hora 93) 0)
-        ((< hora 213) (- hora 93))      ;; verde normal
-        ((< hora 216) (+ 120 (- hora 213))) ;; verde intermitente
-        ((< hora 225) 123)              ;; verde total del ciclo
+        ((< hora 213) (- hora 93))  ;; verde normal
+        ((< hora 216) (+ 120 (- hora 213))) ;; intermitente verde
+        ((< hora 225) 123)
         (t (+ 123 (contador-verde (- hora 225))))
     )
 )
 
 ;; ========================================================
-;; CONTADOR AMARILLO (incluye intermitencia de 3 segundos)
+;; CONTADOR AMARILLO (incluye intermitente 3s)
 ;; ========================================================
 
 (defun contador-amarillo (hora)
     (cond
         ((<= hora 216) 0)
-        ((< hora 222) (- hora 216))     ;; amarillo normal
-        ((< hora 225) (+ 6 (- hora 222))) ;; amarillo intermitente
+        ((< hora 222) (- hora 216)) ;; amarillo normal
+        ((< hora 225) (+ 6 (- hora 222))) ;; intermitente amarillo
         (t (+ 9 (contador-amarillo (- hora 225))))
     )
 )
